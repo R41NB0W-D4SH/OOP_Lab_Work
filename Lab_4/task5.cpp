@@ -1,5 +1,4 @@
 #include <iostream>
-#include <clocale>
 
 using namespace std;
 
@@ -8,6 +7,7 @@ long hms_to_sec(int, int, int);
 
 int main()
 {
+    setlocale(0, "");
     int h, m, s;
     setlocale(0, "");
     while(ch !='n')
