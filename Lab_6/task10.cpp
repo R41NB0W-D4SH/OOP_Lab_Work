@@ -1,34 +1,49 @@
 #include <iostream>
+#include <process.h>
 using namespace std;
 
 class matrix
 {
-private:
-    int str, stlb;
-    int mass[10][10];
-public:
-    matrix(int r, int b) : str(r), stlb(b){}
-    void putel(int i1, int i2, int n)
-    {
-        if(((i1<0)||(i1>str))||((i2<0)||(i2>stlb)))
-        {cout <<"Введен некорректный индекс массива!"; getchar(); exit(1);}
-        mass[i1][i2]=n;
-    }
-    int getel(int i1, int i2)
-    {
-        if(((i1<0)||(i1>str))||((i2<0)||(i2>stlb)))
-        {cout <<"Введен некорректный индекс массива!"; getchar(); exit(1);}
-        return mass[i1][i2];
-    }
+  private:
+    static const unsigned int row = 10;
+    static const unsigned int column = 10;
+    int limit [row] [column];
+  public:
+    void putel ( int, int, int);
+    int getel ( int, int );
 };
 
-int main()
+    void matrix::putel ( int i, int j, int k)
+      {
+            if ((i > 0 && i<row) && (j > 0 && j<column))
+                limit [i][j] = k;
+            else
+                {cout << "Вы вышли за границы массива" << endl; exit (1);}
+      }
+
+    int matrix::getel ( int i, int j)
+      {
+            if ((i > 0 && i<row) && (j > 0 && j<column))
+                return limit [i][j];
+            else
+                {cout << "Вы вышли за границы массива" << endl; exit (1);}
+      }
+
+int main ()
 {
-    setlocale(0,"");
-    matrix m1 (3, 4);
-    int temp=12345;
-    m1.putel(7, 4, temp);
-    temp=m1.getel(7, 4);
-    cout <<"Значение равно: " <<temp <<endl;
-    system("pause");
+  setlocale (0, "");
+  matrix m1;
+  int temp;
+  int row, column;
+  cout << "Введите значение помещаемое в массив:" << endl;
+  cin >> temp;
+  cout << "Введите индекс строки :" << endl;
+  cin >> row;
+  cout << "Введите индекс столбца :" << endl;
+  cin >> column;
+  m1.putel (row, column, temp);
+  temp = m1.getel (row, column);
+  cout << temp << endl;
+  system("pause");
+  return 0;
 }
